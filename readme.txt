@@ -4,7 +4,7 @@ Contributors: sscovil
 Tags: data, table, csv, import, sort, sortable, sorttable
 Requires at least: 3.2.1
 Tested up to: 3.5.1
-Stable tag: 4.0
+Stable tag: 4.0.1
 
 Import data from a spreadsheet (.csv file format) and display it in a sortable HTML table.
 
