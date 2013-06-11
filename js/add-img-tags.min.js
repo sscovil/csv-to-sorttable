@@ -1,0 +1,1 @@
+(function(e){"use strict";e(function(){e("table.sortable .image a").html(function(){var t=e(this).text();e(this).html('<img src="'+t+'" alt="" />')})})})(jQuery)

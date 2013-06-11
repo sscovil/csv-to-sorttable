@@ -1,0 +1,12 @@
+Description, Example, Group
+"Some plan, ordinary text.", "Hello World!", "Text"
+"Some text and HTML tags.", "The <strong>strong</strong> tag is deprecated!", "HTML"
+"An HTML &lt;img&gt; tag.", <img src="http://s.wordpress.org/about/images/logos/wordpress-logo-32-blue.png" alt="WordPress logo" />, "HTML"
+"A text link, made clickable.", https://github.com/sscovil/csv-to-sorttable, "Link"
+"An email address.", "name@example.com", "Link"
+"An image file URL, converted to a clickable image.", http://s.wordpress.org/about/images/logos/wordpress-logo-32-blue.png, "Link"
+"A .zip file URL, converted to a clickable file type icon.", https://github.com/sscovil/premium-posts/archive/master.zip, "Icon"
+"Another file type icon (link is invalid).", http://example.com/test.doc, "Icon"
+"Another file type icon (link is invalid).", http://example.com/test.pdf, "Icon"
+"Another file type icon (link is invalid).", http://example.com/test.ppt, "Icon"
+"Another file type icon (link is invalid).", http://example.com/test.xls, "Icon"
