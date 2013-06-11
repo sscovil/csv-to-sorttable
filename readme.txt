@@ -94,6 +94,9 @@ This plugin utilizes some excellent open source scripts, functions and images wh
 
 == Changelog ==
 
+= 4.0.1 =
+* Fixed bug causing image-type and file-type classes from incorrectly carrying over into other table cells.
+
 = 4.0 =
 * Major code revision!
 * Replaced custom CSV file import function with WordPress core function: `wp_remote_fopen()`.

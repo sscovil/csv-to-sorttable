@@ -3,14 +3,14 @@
  * Plugin Name: CSV to SortTable
  * Plugin URI: https://github.com/sscovil/csv-to-sorttable
  * Description: Import data from a spreadsheet (.csv file format) and display it in a sortable table.
- * Version: 4.0
+ * Version: 4.0.1
  * Author: sscovil
  * Author URI: http://shaunscovil.com
  * Text Domain: csv-to-sorttable
  * License: GPL2
  */
  
- // Define file path constants.
+// Define file path constants.
 define( 'CSV_06082013_PATH', plugin_dir_path(__FILE__) );
 define( 'CSV_06082013_URL', plugin_dir_url(__FILE__) );
 define( 'CSV_06082013_BASE', plugin_basename(__FILE__) );

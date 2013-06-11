@@ -153,11 +153,13 @@ class CSV_to_SortTable {
 
             // Loop through each column.
             foreach( $cols as $col => $cell ) {
+                $class = $col_classes[$col];
+                $file_ext = null;
+
                 $href_val = $this->get_href_val( $cell );
                 if ( $href_val )
                     $file_ext = $this->get_file_ext( $href_val );
 
-                $class = $col_classes[$col];
                 if ( isset( $file_ext ) ) {
                     $class .= $this->get_icon_class( $file_ext );
                     $class .= $this->get_image_class( $file_ext );
