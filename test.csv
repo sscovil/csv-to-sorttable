@@ -5,7 +5,7 @@ Description, Example, Group
 "A text link, made clickable.", https://github.com/sscovil/csv-to-sorttable, "Link"
 "An email address.", "name@example.com", "Link"
 "An image file URL, converted to a clickable image.", http://s.wordpress.org/about/images/logos/wordpress-logo-32-blue.png, "Link"
-"A .zip file URL, converted to a clickable file type icon.", https://github.com/sscovil/premium-posts/archive/master.zip, "Icon"
+"A .zip file URL, converted to a clickable file type icon.", http://downloads.wordpress.org/plugin/csv-to-sorttable.4.0.zip, "Icon"
 "Another file type icon (link is invalid).", http://example.com/test.doc, "Icon"
 "Another file type icon (link is invalid).", http://example.com/test.pdf, "Icon"
 "Another file type icon (link is invalid).", http://example.com/test.ppt, "Icon"
