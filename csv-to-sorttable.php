@@ -3,7 +3,7 @@
  * Plugin Name: CSV to SortTable
  * Plugin URI: https://github.com/sscovil/csv-to-sorttable
  * Description: Import data from a spreadsheet (.csv file format) and display it in a sortable table.
- * Version: 4.0.1
+ * Version: 4.0.2
  * Author: sscovil
  * Author URI: http://shaunscovil.com
  * Text Domain: csv-to-sorttable

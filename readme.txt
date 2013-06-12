@@ -4,7 +4,7 @@ Contributors: sscovil
 Tags: data, table, csv, import, sort, sortable, sorttable
 Requires at least: 3.2.1
 Tested up to: 3.5.1
-Stable tag: 4.0.1
+Stable tag: 4.0.2
 
 Import data from a spreadsheet (.csv file format) and display it in a sortable HTML table.
 
@@ -93,6 +93,9 @@ This plugin utilizes some excellent open source scripts, functions and images wh
 
 
 == Changelog ==
+
+= 4.0.2 =
+* Fixed support for old shortcode `csv2table`.
 
 = 4.0.1 =
 * Fixed bug causing image-type and file-type classes from incorrectly carrying over into other table cells.

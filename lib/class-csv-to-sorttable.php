@@ -28,7 +28,7 @@ class CSV_to_SortTable {
         $this->set_valid_icon_types();
         $this->set_valid_image_types();
         add_shortcode( 'csv', array( $this, 'shortcode' ) ); // New shortcode.
-        add_shortcode( 'csv2sorttable', array( $this, 'shortcode' ) ); // Old shortcode.
+        add_shortcode( 'csv2table', array( $this, 'shortcode' ) ); // Old shortcode.
     }
 
     /**
