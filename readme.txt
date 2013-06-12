@@ -18,7 +18,7 @@ CSV to SortTable is great for anyone who keeps track of important information us
 
 Insert a sortable table into any page or post using this shortcode:
 
-`[csv src="http://example.com/myfile.csv"]`
+`[csv src=http://example.com/myfile.csv]`
 
 The result will be a beautiful, semantically-correct HTML table populated with the contents of your file.
 
@@ -33,9 +33,9 @@ This plugin automatically does a few things for you, all of which can be disable
 
 To disable any of these features, use the `disable` shortcode attribute:
 
-`[csv src="http://example.com/myfile.csv" disable=css]`
-`[csv src="http://example.com/myfile.csv" disable=icons,images]`
-`[csv src="http://example.com/myfile.csv" disable=all]`
+`[csv src=http://example.com/myfile.csv disable=css]`
+`[csv src=http://example.com/myfile.csv disable=icons,images]`
+`[csv src=http://example.com/myfile.csv disable=all]`
 
 The first shortcode would just disable the plugin CSS; the second would disable both icons and images; and the third would disable all features. You can disable any combination using a comma-separated list.
 
@@ -46,7 +46,7 @@ Let's say you have a table with three columns: Item, Description and Type. You w
 
 This can be done by assigning a column number to the `group` shortcode attribute, like this:
 
-`[csv src="http://example.com/myfile.csv" group=3]`
+`[csv src=http://example.com/myfile.csv group=3]`
 
 The result would be a special class assigned to each table row based on the value of the third column.
 
@@ -55,9 +55,9 @@ The result would be a special class assigned to each table row based on the valu
 
 Most table data can be sorted alphabetically, but you may have numbers, dates or columns that should not be sortable. To change the sorting rules for one or more columns, use the following shortcode attributes.
 
-`[csv src="http://example.com/myfile.csv" number=2]`
-`[csv src="http://example.com/myfile.csv" date=3]`
-`[csv src="http://example.com/myfile.csv" unsortable=4,5,6]`
+`[csv src=http://example.com/myfile.csv number=2]`
+`[csv src=http://example.com/myfile.csv date=3]`
+`[csv src=http://example.com/myfile.csv unsortable=4,5,6]`
 
 The values can be a single column number, or multiple column numbers in a comma-separated list.
 
@@ -65,7 +65,7 @@ The values can be a single column number, or multiple column numbers in a comma-
 == Installation ==
 
 1. Install and activate the plugin via `WP-Admin > Plugins`.
-2. Add shortcode to a post or page: `[csv src="http://example.com/data.csv]`.
+2. Add shortcode to a post or page: `[csv src=http://example.com/data.csv]`.
 3. Use optional shortcode attributes to modify table behavior (see description).
 
 TinyMCE button coming soon!
@@ -95,7 +95,7 @@ This plugin utilizes some excellent open source scripts, functions and images wh
 == Changelog ==
 
 = 4.0.2 =
-* Fixed support for old shortcode `csv2table`.
+* Fixed support for old shortcode `[csv2table]`.
 
 = 4.0.1 =
 * Fixed bug causing image-type and file-type classes from incorrectly carrying over into other table cells.
@@ -111,7 +111,7 @@ This plugin utilizes some excellent open source scripts, functions and images wh
 * Added feature that converts image file URLs into images with links using jQuery.
 * Modified row and column classes and 'group' class feature.
 * Killed `even` and `odd` classes introduced in v2.0; use CSS selectors `:nth-child(even)` and `:nth-child(odd)`.
-* Added shotcode `[csv src=""]` and retained legacy support for `[csv2sorttable source=""]`.
+* Added shotcode `[csv src=""]` and retained legacy support for `[csv2table source=""]`.
 * Included test.csv file as default if source file is defined.
 
 = 3.1 =
@@ -140,9 +140,3 @@ This plugin utilizes some excellent open source scripts, functions and images wh
 
 = 1.0 =
 * First public release.
-
-
-== Upgrade Notice ==
-
-= 4.0 =
-This is a major update! Steps were taken to ensure backwards compatibility, but the entire plugin was re-written from the ground up so there are bound to be cases where it does not perform as expected. The changes made vastly improve performance, usability and (to some extent) security.
