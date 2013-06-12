@@ -112,8 +112,8 @@ class CSV_to_SortTable {
         $this->load_js_css( $enabled );
 
         // Determine .csv file source.
-        if ( isset( $atts['src'] ) || isset( $atts['$source'] ) ) {
-            $src = isset( $atts['$source'] ) ? esc_url( $atts['$source'] ) : esc_url( $atts['$src'] );
+        if ( isset( $atts['src'] ) || isset( $atts['source'] ) ) {
+            $src = isset( $atts['source'] ) ? esc_url( $atts['source'] ) : esc_url( $atts['src'] );
         } else {
             $src = CSV_06082013_URL . 'test.csv'; // Default if no .csv file source is defined.
         }
