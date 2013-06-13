@@ -1,6 +1,6 @@
 Description, Example, Group
 "Some plan, ordinary text.", "Hello World!", "Text"
-"Some text and HTML tags.", "The <strong>strong</strong> tag is deprecated!", "HTML"
+"Some text and HTML tags.", "The <strong>strong</strong> tag is <em>not</em> deprecated!", "HTML"
 "An HTML &lt;img&gt; tag.", <img src="http://s.wordpress.org/about/images/logos/wordpress-logo-32-blue.png" alt="WordPress logo" />, "HTML"
 "A text link, made clickable.", https://github.com/sscovil/csv-to-sorttable, "Link"
 "An email address.", "name@example.com", "Link"
