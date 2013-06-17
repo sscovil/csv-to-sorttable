@@ -22,7 +22,7 @@ Insert a sortable table into any page or post using this shortcode:
 
 The result will be a beautiful, semantically-correct HTML table populated with the contents of your file.
 
-**NEW!** As of v4.1.2, if the `src` value is a relative path (begining with a forward slash), the plugin will refer to the "Site address (URL)" defined in WP-Admin > Settings > General.
+**As of v4.1.2,** if the `src` value is a relative path (beginning with a forward slash), the plugin will refer to the "Site address (URL)" defined in `WP-Admin > Settings > General`.
 
 Example: `[csv src=/mydata/data.csv]` would reference `http://example.com/mydata/data.csv`.
 
