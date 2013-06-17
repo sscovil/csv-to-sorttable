@@ -4,7 +4,7 @@ Contributors: sscovil
 Tags: data, table, csv, import, sort, sortable, sorttable
 Requires at least: 3.2.1
 Tested up to: 3.5.1
-Stable tag: 4.1.2
+Stable tag: 4.1.3
 
 Import data from a spreadsheet (.csv file format) and display it in a sortable HTML table.
 
@@ -65,6 +65,13 @@ Most table data can be sorted alphabetically, but you may have numbers, dates or
 The values can be a single column number, or multiple column numbers in a comma-separated list.
 
 
+= Data Array Filter =
+
+Here is an example of how to filter the table data array before the HTML table is rendered:
+
+[https://gist.github.com/sscovil/5798612](https://gist.github.com/sscovil/5798612)
+
+
 == Installation ==
 
 1. Install and activate the plugin via `WP-Admin > Plugins`.
@@ -96,6 +103,9 @@ This plugin utilizes some excellent open source scripts, functions and images wh
 
 
 == Changelog ==
+
+= 4.1.3 =
+* Added filter `csv_to_sorttable_data_array` to table data array in `CSV_to_SortTable::parse_csv()`.
 
 = 4.1.2 =
 * Added support for relative paths to CSV files.

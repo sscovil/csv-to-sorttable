@@ -212,7 +212,7 @@ class CSV_to_SortTable {
                 $data[$row][$col] = make_clickable( $cell );
             }
         }
-        return $data;
+        return apply_filters( 'csv_to_sorttable_data_array', $data );
     }
 
     /**
