@@ -4,14 +4,14 @@ Contributors: sscovil
 Tags: data, table, csv, import, sort, sortable, sorttable
 Requires at least: 3.2.1
 Tested up to: 3.5.1
-Stable tag: 4.1.1
+Stable tag: 4.1.2
 
 Import data from a spreadsheet (.csv file format) and display it in a sortable HTML table.
 
 
 == Description ==
 
-CSV to SortTable is great for anyone who keeps track of important information using a spreadsheet. It could be used for product catalogs, inventory lists, or even leaderboards in a competition.
+CSV to SortTable is great for anyone who keeps track of important information using a spreadsheet. It could be used for product catalogs, inventory lists, leaderboards in a competition, or any other application requiring a data table.
 
 
 = How To Use =
@@ -22,6 +22,9 @@ Insert a sortable table into any page or post using this shortcode:
 
 The result will be a beautiful, semantically-correct HTML table populated with the contents of your file.
 
+**NEW!** As of v4.1.2, if the `src` value is a relative path (begining with a forward slash), the plugin will refer to the "Site address (URL)" defined in WP-Admin > Settings > General.
+
+Example: `[csv src=/mydata/data.csv]` would reference `http://example.com/mydata/data.csv`.
 
 = Optional Features =
 
@@ -93,6 +96,9 @@ This plugin utilizes some excellent open source scripts, functions and images wh
 
 
 == Changelog ==
+
+= 4.1.2 =
+* Added support for relative paths to CSV files.
 
 = 4.1.1 =
 * Code cleanup; refactored methods of primary plugin class & improved inline documentation.

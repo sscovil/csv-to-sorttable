@@ -180,10 +180,12 @@ class CSV_to_SortTable {
     function csv_source( $atts ) {
         if ( isset( $atts['src'] ) || isset( $atts['source'] ) ) {
             $src = isset( $atts['source'] ) ? esc_url( $atts['source'] ) : esc_url( $atts['src'] );
-        } else {
-            $src = CSV_06082013_URL . 'test.csv'; // Default file URL if no .csv file source is defined.
+            if ( 0 === strpos( $src, '/' ) )
+                return home_url( $src );
+            else
+                return $src;
         }
-        return $src;
+        return CSV_06082013_URL . 'test.csv'; // Default file URL if no .csv file source is defined.
     }
 
     /**
