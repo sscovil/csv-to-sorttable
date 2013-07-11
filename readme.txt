@@ -4,14 +4,14 @@ Contributors: sscovil
 Tags: data, table, csv, import, sort, sortable, sorttable
 Requires at least: 3.2.1
 Tested up to: 3.5.1
-Stable tag: 4.1.3
+Stable tag: 4.2
 
 Import data from a spreadsheet (.csv file format) and display it in a sortable HTML table.
 
 
 == Description ==
 
-CSV to SortTable is great for anyone who keeps track of important information using a spreadsheet. It could be used for product catalogs, inventory lists, leaderboards in a competition, or any other application requiring a data table.
+CSV to SortTable is great for anyone who wants to display information from a spreadsheet on a WordPress website. This plugin can be used to display product catalogs, inventory lists, leaderboards or anything else that can be stored in a CSV file.
 
 
 = How To Use =
@@ -22,17 +22,14 @@ Insert a sortable table into any page or post using this shortcode:
 
 The result will be a beautiful, semantically-correct HTML table populated with the contents of your file.
 
-**As of v4.1.2,** if the `src` value is a relative path (beginning with a forward slash), the plugin will refer to the "Site address (URL)" defined in `WP-Admin > Settings > General`.
-
-Example: `[csv src=/mydata/data.csv]` would reference `http://example.com/mydata/data.csv`.
 
 = Optional Features =
 
 This plugin automatically does a few things for you, all of which can be disabled:
 
-1. Adds CSS to the table, to make it look nice.
+1. Adds some CSS to make the table look nice.
 2. Converts image file URLs into clickable image links.
-3. Converts some other file URLs into clickable file-type icons (.doc, .pdf, .ppt, .xls, .zip).
+3. Converts certain file URLs into clickable file-type icons (.doc, .pdf, .ppt, .xls, .zip).
 
 To disable any of these features, use the `disable` shortcode attribute:
 
@@ -40,14 +37,23 @@ To disable any of these features, use the `disable` shortcode attribute:
 `[csv src=http://example.com/myfile.csv disable=icons,images]`
 `[csv src=http://example.com/myfile.csv disable=all]`
 
-The first shortcode would just disable the plugin CSS; the second would disable both icons and images; and the third would disable all features. You can disable any combination using a comma-separated list.
+The first example would disable only the plugin CSS; the second would disable both the file-type icons and image links; and the third would disable all optional features. Disable any combination using a comma-separated list (no spaces!).
+
+
+= Table ID =
+
+Want to give your table a unique ID? Use the `id` shortcode attribute:
+
+`[csv src=http://example.com/myfile.csv id=my_data_table]`
+
+The above example would give the `<table>` element an `id` attribute of `my_data_table`.
 
 
 = Group Classes =
 
-Let's say you have a table with three columns: Item, Description and Type. You want all table rows of the same Type to have the same CSS class, so you can highlight them in different colors or modify them all at once with JavaScript.
+Let's say you have a table with three columns: Item, Description and Type. You want all table rows of the same Type to have the same class, so you can highlight them in different colors using CSS or modify them all at once with JavaScript.
 
-This can be done by assigning a column number to the `group` shortcode attribute, like this:
+This can be done by assigning a column number to the `group` shortcode attribute:
 
 `[csv src=http://example.com/myfile.csv group=3]`
 
@@ -56,20 +62,35 @@ The result would be a special class assigned to each table row based on the valu
 
 = Sorting Options =
 
-Most table data can be sorted alphabetically, but you may have numbers, dates or columns that should not be sortable. To change the sorting rules for one or more columns, use the following shortcode attributes.
+By default, table data is sorted alphabetically. If you want to sort columns numerically or as dates, or disable sorting on certain columns, use the following shortcode attributes:
 
 `[csv src=http://example.com/myfile.csv number=2]`
 `[csv src=http://example.com/myfile.csv date=3]`
 `[csv src=http://example.com/myfile.csv unsortable=4,5,6]`
 
-The values can be a single column number, or multiple column numbers in a comma-separated list.
+The values can be a single column number, or multiple column numbers in a comma-separated list (no spaces!).
+
+
+= Relative File Paths =
+
+If the `src` value is a relative path (beginning with a forward slash), the plugin will refer to the "Site address (URL)" defined in `WP-Admin > Settings > General`:
+
+`[csv src=/mydata/data.csv]`
+
+The above example would refer to `http://example.com/mydata/data.csv`.
 
 
 = Data Array Filter =
 
-Here is an example of how to filter the table data array before the HTML table is rendered:
+You may want to manipulate the CSV data after it is imported, but before the HTML table is rendered. To do so, use this filter:
 
-[https://gist.github.com/sscovil/5798612](https://gist.github.com/sscovil/5798612)
+`csv_to_sorttable_data_array`
+
+Here are some code examples of how to use the data array filter:
+
+1. [Remove First Row Function](https://gist.github.com/sscovil/5798612)
+2. [Add a Header Row Function](https://gist.github.com/sscovil/5919849)
+3. [Add a Header Row Plugin](https://gist.github.com/sscovil/5919960)
 
 
 == Installation ==
@@ -77,8 +98,6 @@ Here is an example of how to filter the table data array before the HTML table i
 1. Install and activate the plugin via `WP-Admin > Plugins`.
 2. Add shortcode to a post or page: `[csv src=http://example.com/data.csv]`.
 3. Use optional shortcode attributes to modify table behavior (see description).
-
-TinyMCE button coming soon!
 
 
 == Screenshots ==
@@ -103,6 +122,10 @@ This plugin utilizes some excellent open source scripts, functions and images wh
 
 
 == Changelog ==
+
+= 4.2 =
+* Added `id` shortcode attribute.
+* Fixed a problem with `CSV_to_SortTable::string_to_html_class()` that dropped uppercase letters from class names.
 
 = 4.1.3 =
 * Added filter `csv_to_sorttable_data_array` to table data array in `CSV_to_SortTable::parse_csv()`.

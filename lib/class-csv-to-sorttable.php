@@ -73,6 +73,7 @@ class CSV_to_SortTable {
         $defaults = array(
             'src'        => null,   // Source file url.
             'source'     => null,   // Alternate attribute for source file url.
+            'id'         => '',     // Optional value for <table> id attribute.
             'unsortable' => '',     // Comma-separated list of column numbers that should be unsortable.
             'number'     => '',     // Comma-separated list of column numbers that should be sorted as numeric.
             'date'       => '',     // Comma-separated list of column numbers that should be sorted as date.
@@ -231,7 +232,7 @@ class CSV_to_SortTable {
 
         // Begin rendering HTML and storing it as a string using output buffer.
         ob_start();
-        echo '<table class="sortable">';
+        printf( '<table id="%s" class="sortable">', $this->string_to_html_class( $atts['id'] ) );
 
         // Loop through each row.
         foreach( $rows as $row => $cols ) {
@@ -411,7 +412,7 @@ class CSV_to_SortTable {
         $string = preg_replace(
             $pattern = '/[^a-z0-9\-\_]/',
             $replace = '',
-            $subject = $string
+            $subject = strtolower( $string )
         );
         return $string;
     }
