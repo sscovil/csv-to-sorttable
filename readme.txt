@@ -88,9 +88,9 @@ You may want to manipulate the CSV data after it is imported, but before the HTM
 
 Here are some code examples of how to use the data array filter:
 
-1. [Remove First Row Function](https://gist.github.com/sscovil/5798612)
-2. [Add a Header Row Function](https://gist.github.com/sscovil/5919849)
-3. [Add a Header Row Plugin](https://gist.github.com/sscovil/5919960)
+1. [Remove First Row (Function)](https://gist.github.com/sscovil/5798612)
+2. [Add a Header Row (Function)](https://gist.github.com/sscovil/5919849)
+3. [Add a Header Row (Plugin)](https://gist.github.com/sscovil/5919960)
 
 
 == Installation ==
