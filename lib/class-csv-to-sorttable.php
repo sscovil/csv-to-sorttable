@@ -7,7 +7,7 @@
  */
 class CSV_to_SortTable {
 
-    protected static $instance, $valid_icon_types, $valid_image_types;
+    protected static $instance, $valid_icon_types, $valid_image_types, $default_atts;
 
     /**
      * Singleton Factory
@@ -29,6 +29,7 @@ class CSV_to_SortTable {
     protected function __construct() {
         $this->set_valid_icon_types();
         $this->set_valid_image_types();
+        $this->set_default_atts();
         add_shortcode( 'csv', array( $this, 'shortcode' ) ); // New shortcode.
         add_shortcode( 'csv2table', array( $this, 'shortcode' ) ); // Old shortcode.
     }
@@ -39,14 +40,16 @@ class CSV_to_SortTable {
      * @uses function apply_filters
      */
     function set_valid_icon_types() {
-        self::$valid_icon_types = array(
-            'doc', 'docx', 'odt', 'rtf', 'txt', 'wpd', // Use DOC icon
-            'pdf',                                     // Use PDF icon
-            'ppt', 'pptx', 'odp',                      // Use PPT icon
-            'xls', 'xlsx', 'ods', 'csv',               // Use XLS icon
-            'zip', 'zipx', 'gz', '7z', 'rar', 'tar',   // Use ZIP icon
+        apply_filters(
+            'sorttable_valid_icon_file_types',
+            self::$valid_icon_types = array(
+                'doc', 'docx', 'odt', 'rtf', 'txt', 'wpd', // Use DOC icon
+                'pdf',                                     // Use PDF icon
+                'ppt', 'pptx', 'odp',                      // Use PPT icon
+                'xls', 'xlsx', 'ods', 'csv',               // Use XLS icon
+                'zip', 'zipx', 'gz', '7z', 'rar', 'tar',   // Use ZIP icon
+            )
         );
-        apply_filters( 'sorttable_valid_icon_file_types', self::$valid_icon_types );
     }
 
     /**
@@ -55,8 +58,31 @@ class CSV_to_SortTable {
      * @uses function apply_filters
      */
     function set_valid_image_types() {
-        self::$valid_image_types = array( 'jpg', 'jpeg', 'png', 'gif', 'tiff', 'bmp' );
-        apply_filters( 'sorttable_valid_image_file_types', self::$valid_image_types );
+        apply_filters(
+            'sorttable_valid_image_file_types',
+            self::$valid_image_types = array( 'jpg', 'jpeg', 'png', 'gif', 'tiff', 'bmp' )
+        );
+    }
+
+    /**
+     * Set Default Shortcode Attributes
+     *
+     * @uses function apply_filters
+     */
+    function set_default_atts() {
+        apply_filters(
+            'csv_to_sorttable_default_atts',
+            self::$default_atts = array(
+                'src'        => null,   // Source file url.
+                'source'     => null,   // Alternate attribute for source file url.
+                'id'         => '',     // Optional value for <table> id attribute.
+                'unsortable' => '',     // Comma-separated list of column numbers that should be unsortable.
+                'number'     => '',     // Comma-separated list of column numbers that should be sorted as numeric.
+                'date'       => '',     // Comma-separated list of column numbers that should be sorted as date.
+                'group'      => 0,      // Column to check for identical values and apply matching class to rows.
+                'disable'    => '',     // Available options: css, icons, images, all
+            )
+        );
     }
 
     /**
@@ -69,55 +95,42 @@ class CSV_to_SortTable {
      * @return string       HTML for rendered table, or blank string if no data.
      */
     function shortcode( $atts ) {
-        // Default values for shortcode attributes.
-        $defaults = array(
-            'src'        => null,   // Source file url.
-            'source'     => null,   // Alternate attribute for source file url.
-            'id'         => '',     // Optional value for <table> id attribute.
-            'unsortable' => '',     // Comma-separated list of column numbers that should be unsortable.
-            'number'     => '',     // Comma-separated list of column numbers that should be sorted as numeric.
-            'date'       => '',     // Comma-separated list of column numbers that should be sorted as date.
-            'group'      => 0,      // Column to check for identical values and apply matching class to rows.
-            'disable'    => '',     // Available options: css, icons, images, all
-        );
-        $atts = shortcode_atts( $defaults, $atts );
+        // Merge user-defined shortcode attributes with default values.
+        $atts = shortcode_atts( self::$default_atts, $atts );
 
-        // Create an array of enabled features based on 'disable' attribute.
+        // Create an array of enabled features based on optional 'disable' shortcode attribute.
         $enabled = $this->enabled_features( $atts['disable'] );
 
-        // Enqueue plugin JavaScript & CSS only on pages where shortcode is used.
+        // Enqueue enabled JavaScript & CSS only on pages where shortcode is used.
         $this->load_js_css( $enabled );
 
-        // Determine .csv file source based on 'src' and 'source' attributes; default to test.csv URL.
+        // Determine .csv file URL based on 'src' or 'source' attributes; use test.csv file by default.
         $src = $this->csv_source( $atts );
 
-        // Get contents of .CSV file as string.
+        // Load contents of .csv file as a string.
         $file = wp_remote_fopen( $src );
 
-        // Parse CSV string into a multidimensional array.
+        // Parse .csv file string into a multidimensional array of rows containing columns containing cell values.
         $rows = $this->parse_csv( $file );
 
-        // Render table and return HTML string.
+        // Loop through the array, render an HTML table and return the output as a string.
         return $this->render_table( $rows, $atts );
     }
 
     /**
      * Enabled Features
      *
-     * @param  string $disable A string of feature names to disable.
-     * @return array           Plugin features with boolean values: true if enabled, false if disabled.
+     * @param  string $disable A user-defined string of features to disable.
+     * @return array           Array of features with boolean values: true if enabled (default), false if disabled.
      */
     function enabled_features( $disable ) {
-        $enabled = array(
-            'css'    => true,
-            'icons'  => true,
-            'images' => true,
-        );
-
-        // Mark features as false if they are listed in 'disable' shortcode attribute.
-        foreach( $enabled as $feature => $value ) {
+        $enabled  = array();
+        $features = array( 'css', 'icons', 'images' );
+        foreach( $features as $feature ) {
             if ( false !== strpos( $disable, 'all' ) || false !== strpos( $disable, $feature ) )
                 $enabled[$feature] = false;
+            else
+                $enabled[$feature] = true;
         }
         return $enabled;
     }
@@ -133,7 +146,7 @@ class CSV_to_SortTable {
      * @param array $enabled Feature names as keys, with boolean values (true == enabled, false == disabled).
      */
     function load_js_css( $enabled ) {
-        // JavaScript: sorttable.js by Stuart Langridge: http://www.kryogenix.org/code/browser/sorttable/
+        // JS: sorttable.js by Stuart Langridge: http://www.kryogenix.org/code/browser/sorttable/
         wp_register_script(
             $handle    = 'sorttable',
             $src       = CSV_06082013_URL . 'js/sorttable.min.js',
@@ -143,12 +156,12 @@ class CSV_to_SortTable {
         );
         wp_enqueue_script( $handle );
 
-        // JavaScript: add-img-tags.js
+        // JS: add-img-tags.js
         if ( isset( $enabled['images'] ) && $enabled['images'] ) {
             wp_register_script(
-                $handle    = 'add-img-tags',
-                $src       = CSV_06082013_URL . 'js/add-img-tags.min.js',
-                $deps      = array( 'jquery' )
+                $handle = 'add-img-tags',
+                $src    = CSV_06082013_URL . 'js/add-img-tags.min.js',
+                $deps   = array( 'jquery' )
             );
             wp_enqueue_script( $handle );
         }
@@ -173,7 +186,7 @@ class CSV_to_SortTable {
     }
 
     /**
-     * CSV Source
+     * Determine CSV Source
      *
      * @param  array  $atts Shortcode attributes.
      * @return string       URL of .csv file to load.
@@ -190,7 +203,7 @@ class CSV_to_SortTable {
     }
 
     /**
-     * Parse CSV
+     * Parse CSV String to Array
      *
      * @uses function str_getcsv ( or str_getcsv4 by V.Krishn, if PHP < 5.3 )
      * @uses function make_clickable
@@ -199,21 +212,19 @@ class CSV_to_SortTable {
      * @return array        CSV file contents as multidimensional array.
      */
     function parse_csv( $file ) {
-        // Parse file string into an array of rows.
+        $data = array();
         $file = str_replace( "\r\n", "\n", trim( $file ) );
         $rows = explode( "\n", $file );
-        $data = array();
-
-        // Parse each row into an array of columns.
         foreach( $rows as $row => $cols ) {
             $cols = str_getcsv( $cols, ',' );
-
-            // Populate table data array with cell contents.
             foreach( $cols as $col => $cell ) {
                 $data[$row][$col] = make_clickable( $cell );
             }
         }
-        return apply_filters( 'csv_to_sorttable_data_array', $data );
+        return apply_filters(
+            'csv_to_sorttable_data_array',
+            $data
+        );
     }
 
     /**
