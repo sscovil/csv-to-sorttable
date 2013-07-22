@@ -5,6 +5,8 @@
     background-image: url('../img/file-type-icons.png');
     background-repeat: no-repeat;
     color: transparent;
+    font-size: 0;   /* Needed for IE8 */
+    line-height: 0; /* Needed for IE8 */
     float: left;
     position: relative;
     width: 35px;
